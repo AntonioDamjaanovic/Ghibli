@@ -1,0 +1,8 @@
+//
+//  Film.swift
+//  Ghibli
+//
+//  Created by Antonio Damjanović on 28.12.2025..
+//
+
+import Foundation
