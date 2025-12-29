@@ -1,10 +1,3 @@
-//
-//  SampleData.json
-//  Ghibli
-//
-//  Created by Antonio Damjanović on 28.12.2025..
-//
-
 {
   "films": [
     { "id": "2baf70d1-42bb-4437-b551-e5fed5a87abe",
