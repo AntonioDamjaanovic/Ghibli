@@ -31,7 +31,23 @@ struct Film: Codable, Identifiable, Equatable, Hashable {
     
     // MARK: Preview
     static var example: Film {
-        MockGhibliService().fetchFilm()
+        //MockGhibliService().fetchFilm()
+        let bannerURL = URL.convertAssetImage(named: "bannerImage")
+        let posterURL = URL.convertAssetImage(named: "posterImage")
+        
+        return Film(
+            id: "id",
+            title: "My Neighbor Totoro",
+            description: "Two sisters move to the country with their father in order to be closer to their hospitalized mother, and discover the surrounding trees are inhabited by Totoros, magical spirits of the forest. When the youngest runs away from home, the older sister seeks help from the spirits to find her.",
+            director: "Hayao Miyazaki",
+            producer: "Hayao Miyazaki",
+            releaseYear: "1988",
+            score: "93",
+            duration: "86",
+            image: posterURL?.absoluteString ?? "",
+            bannerImage: bannerURL?.absoluteString ?? "",
+            people: ["https://ghibliapi.vercel.app/people/598f7048-74ff-41e0-92ef-87dc1ad980a9"]
+        )
     }
 }
 
