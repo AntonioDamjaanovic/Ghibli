@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FilmDetailView: View {
+struct FilmDetailScreen: View {
     
     let film: Film
     
@@ -56,5 +56,5 @@ struct FilmDetailView: View {
 }
 
 #Preview {
-    FilmDetailView(film: Film.example)
+    FilmDetailScreen(film: Film.example)
 }
