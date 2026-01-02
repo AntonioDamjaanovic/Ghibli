@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct FavoritesScreen: View {
+    
+    let filmsViewModel: FilmsViewModel
+    var films: [Film] {
+        //TODO: fet favorites
+        // retreive ids from storage
+        // get data for favorite ids from films data
+        return []
+    }
+    
     var body: some View {
-        Text("Favorites Screen")
+        NavigationStack {
+            Group {
+                if films.isEmpty {
+                    ContentUnavailableView("No Favorites Yet", systemImage: "heart")
+                } else {
+                    FilmListView(films: films)
+                }
+            }
+            .navigationTitle("Favorites")
+        }
     }
 }
 
 #Preview {
-    FavoritesScreen()
+    FavoritesScreen(filmsViewModel: FilmsViewModel(service: MockGhibliService()))
 }
