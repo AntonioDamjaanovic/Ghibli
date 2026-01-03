@@ -10,33 +10,66 @@ import SwiftUI
 struct FilmListView: View {
     
     var films: [Film]
+    let favoritesViewModel: FavoritesViewModel
     
     var body: some View {
         List(films) { film in
             NavigationLink(value: film) {
-                HStack {
-                    FilmImageView(url: film.image)
-                        .frame(width: 100, height: 150)
-                    
-                    Text(film.title)
-                }
+                FilmRow(film: film, favoritesViewModel: favoritesViewModel)
             }
         }
         .navigationDestination(for: Film.self) { film in
-            FilmDetailScreen(film: film)
+            FilmDetailScreen(film: film, favoritesViewModel: favoritesViewModel)
         }
     }
 }
-/*
-#Preview("Mocked Film List") {
-    @State @Previewable var vm = FilmsViewModel(service: MockGhibliService())
+
+private struct FilmRow: View {
     
-    FilmListView(filmsViewModel: vm)
+    let film: Film
+    let favoritesViewModel: FavoritesViewModel
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            FilmImageView(url: film.image)
+                .frame(width: 100, height: 150)
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(film.title)
+                        .bold()
+                    
+                    Spacer()
+                    
+                    FavoriteButton(filmID: film.id, favoritesViewModel: favoritesViewModel)
+                        .buttonStyle(.plain)
+                        .controlSize(.large)
+                }
+                .padding(.bottom)
+                
+                Text("Directed by \(film.director)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Text("Released: \(film.releaseYear)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding(.top)
+        }
+    }
 }
 
-#Preview("Real Film List") {
-    @State @Previewable var vm = FilmsViewModel(service: DefaultGhibliService())
+#Preview {
+    //@State @Previewable var filmsViewModel = FilmsViewModel(service: MockGhibliService())
+    @State @Previewable var favorites = FavoritesViewModel(service: MockFavoriteStorage())
     
-    FilmListView(filmsViewModel: vm)
+    NavigationStack {
+        FilmListView(films: [Film.example, Film.exampleFavorite],
+                     favoritesViewModel: favorites)
+    }
+    .task {
+        favorites.load()
+    }
 }
-*/
+

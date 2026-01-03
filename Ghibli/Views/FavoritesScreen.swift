@@ -10,11 +10,16 @@ import SwiftUI
 struct FavoritesScreen: View {
     
     let filmsViewModel: FilmsViewModel
+    let favoritesViewModel: FavoritesViewModel
+    
     var films: [Film] {
-        //TODO: fet favorites
-        // retreive ids from storage
-        // get data for favorite ids from films data
-        return []
+        let favorites = favoritesViewModel.favoriteIDs
+        switch filmsViewModel.state {
+            case .loaded(let films):
+                return films.filter { favorites.contains($0.id) }
+            default:
+                return []
+        }
     }
     
     var body: some View {
@@ -23,7 +28,7 @@ struct FavoritesScreen: View {
                 if films.isEmpty {
                     ContentUnavailableView("No Favorites Yet", systemImage: "heart")
                 } else {
-                    FilmListView(films: films)
+                    FilmListView(films: films, favoritesViewModel: favoritesViewModel)
                 }
             }
             .navigationTitle("Favorites")
@@ -32,5 +37,5 @@ struct FavoritesScreen: View {
 }
 
 #Preview {
-    FavoritesScreen(filmsViewModel: FilmsViewModel(service: MockGhibliService()))
+    FavoritesScreen(filmsViewModel: FilmsViewModel.example, favoritesViewModel: FavoritesViewModel.example)
 }
