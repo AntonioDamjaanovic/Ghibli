@@ -1,15 +1,15 @@
 //
-//  FilmsViewModel.swift
+//  SearchFilmsViewModel.swift
 //  Ghibli
 //
-//  Created by Antonio Damjanović on 29.12.2025..
+//  Created by Antonio Damjanović on 04.01.2026..
 //
 
 import Foundation
 import Observation
 
 @Observable
-class FilmsViewModel {
+class SearchFilmsViewModel {
     
     var state: LoadingState<[Film]> = .idle
     
@@ -19,13 +19,15 @@ class FilmsViewModel {
         self.service = service
     }
     
-    func fetch() async {
-        guard !state.isLoading || state.error != nil else { return }
+    func fetch(for searchTerm: String) async {
+        guard !searchTerm.isEmpty else {
+            return
+        }
         
         state = .loading
         
         do {
-            let films = try await service.fetchFilms()
+            let films = try await service.searchFilm(for: searchTerm)
             self.state = .loaded(films)
         } catch let error as APIError {
             self.state = .error(error.errorDescription ?? "Unknown error")
