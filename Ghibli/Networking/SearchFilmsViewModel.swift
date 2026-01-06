@@ -12,6 +12,7 @@ import Observation
 class SearchFilmsViewModel {
     
     var state: LoadingState<[Film]> = .idle
+    private var currentSearchTerm: String = ""
     
     private let service: GhibliService
     
@@ -20,18 +21,34 @@ class SearchFilmsViewModel {
     }
     
     func fetch(for searchTerm: String) async {
+        
+        self.currentSearchTerm = searchTerm
+        
         guard !searchTerm.isEmpty else {
+            state = .idle
             return
         }
+        
+        try? await Task.sleep(for: .milliseconds(500))
+        guard !Task.isCancelled else { return }
         
         state = .loading
         
         do {
             let films = try await service.searchFilm(for: searchTerm)
             self.state = .loaded(films)
-        } catch let error as APIError {
-            self.state = .error(error.errorDescription ?? "Unknown error")
         } catch {
+            setError(error, for: searchTerm)
+        }
+    }
+    
+    func setError(_ error: Error, for searchTerm: String) {
+        
+        guard currentSearchTerm == searchTerm else { return }
+        
+        if let error = error as? APIError {
+            self.state = .error(error.errorDescription ?? "Unknown error")
+        } else {
             self.state = .error("Unknown error")
         }
     }

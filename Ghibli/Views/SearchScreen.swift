@@ -35,9 +35,6 @@ struct SearchScreen: View {
             }
             .searchable(text: $text)
             .task(id: text) {
-                try? await Task.sleep(for: .milliseconds(500))
-                guard !Task.isCancelled else { return }
-                
                 await searchViewModel.fetch(for: text)
             }
         }
