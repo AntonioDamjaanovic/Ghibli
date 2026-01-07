@@ -29,10 +29,10 @@ class SearchFilmsViewModel {
             return
         }
         
+        state = .loading
+        
         try? await Task.sleep(for: .milliseconds(500))
         guard !Task.isCancelled else { return }
-        
-        state = .loading
         
         do {
             let films = try await service.searchFilm(for: searchTerm)
