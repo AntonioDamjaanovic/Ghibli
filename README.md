@@ -24,13 +24,13 @@ API [documentation](https://ghibliapi.vercel.app/) for Studio Ghibli:
 
 ## 📸 Screenshots
   
-<p float="left">
+<div style="display:flex; gap:16px;">
   <img src="images/ghibli_movie_list.jpeg" width="200" height="1000"/>
   <img src="/images/ghibli_movie_detail.jpeg" width="200" height="1000"/>
   <img src="/images/ghibli_favorites.jpeg" width="200" height="1000"/>
-</p>
-<p float="left">
-  <img src="/images/ghibli_favorites.jpeg" width="200" height="1000"/>
+</div>
+
+<div style="display:flex; gap:16px; margin-top:16px;">
   <img src="/images/ghibli_search.jpeg" width="200" height="1000"/>
   <img src="/images/ghibli_settings.jpeg" width="200" height="1000"/>
-</p>
+</div>
