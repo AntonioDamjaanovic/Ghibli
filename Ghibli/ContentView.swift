@@ -33,6 +33,7 @@ struct ContentView: View {
             await filmsViewModel.fetch()
             favoritesViewModel.load()
         }
+        .setAppearanceTheme()
     }
 }
 
