@@ -36,6 +36,11 @@ struct DefaultGhibliService: GhibliService {
         return try await fetch(from: url, type: [Film].self)
     }
     
+    func fetchPeople() async throws -> [Person] {
+        let url = "https://ghibliapi.vercel.app/people"
+        return try await fetch(from: url, type: [Person].self)
+    }
+    
     func searchFilm(for searchTerm: String) async throws -> [Film] {
         let allFilms = try await fetchFilms() // don't have a search endpoint otherwise would do this here
         

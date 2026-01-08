@@ -20,9 +20,10 @@ struct Film: Codable, Identifiable, Equatable, Hashable {
     let image: String
     let bannerImage: String
     let people: [String]
+    let url: String
     
     enum CodingKeys: String, CodingKey {
-        case id, title, image, description, director, producer, people
+        case id, title, image, description, director, producer, people, url
         
         case bannerImage = "movie_banner"
         case releaseYear = "release_date"
@@ -48,7 +49,8 @@ struct Film: Codable, Identifiable, Equatable, Hashable {
                        duration: "86",
                        image: posterULR?.absoluteString ?? "",
                        bannerImage: bannerULR?.absoluteString ?? "",
-                       people: ["https://ghibliapi.vercel.app/people/598f7048-74ff-41e0-92ef-87dc1ad980a9"])
+                       people: ["https://ghibliapi.vercel.app/people/598f7048-74ff-41e0-92ef-87dc1ad980a9"],
+                       url: "https://ghibliapi.vercel.app/films/12cfb892-aac0-4c5b-94af-521852e46d6a")
         }
         
     @MainActor
@@ -68,7 +70,8 @@ struct Film: Codable, Identifiable, Equatable, Hashable {
                    duration: "86",
                    image: posterULR?.absoluteString ?? "",
                    bannerImage: bannerULR?.absoluteString ?? "",
-                   people: ["https://ghibliapi.vercel.app/people/598f7048-74ff-41e0-92ef-87dc1ad980a9"])
+                   people: ["https://ghibliapi.vercel.app/people/598f7048-74ff-41e0-92ef-87dc1ad980a9"],
+                   url: "https://ghibliapi.vercel.app/films/12cfb892-aac0-4c5b-94af-521852e46d6a")
     }
 }
 

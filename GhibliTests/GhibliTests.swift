@@ -38,6 +38,10 @@ struct GhibliTests {
             return mockFilms
         }
         
+        func fetchPeople() async throws -> [Person] {
+            return [Person(id: "", name: "", gender: "", age: "", eyeColor: "", hairColor: "", films: [], species: "", url: "")]
+        }
+        
         func searchFilm(for searchTerm: String) async throws -> [Film] {
             self.fetchCallCount += 1
             self.lastSearchQuery = searchTerm
@@ -79,7 +83,8 @@ struct GhibliTests {
              duration: "",
              image: "",
              bannerImage: "",
-             people: []
+             people: [],
+             url: "https://ghibliapi.vercel.app/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49"
          ),
          Film(
              id: "2",
@@ -92,7 +97,8 @@ struct GhibliTests {
              duration: "",
              image: "",
              bannerImage: "",
-             people: []
+             people: [],
+             url: "https://ghibliapi.vercel.app/films/dc2e6bd1-8156-4886-adff-b39e6043af0c"
          ),
          Film(
              id: "3",
@@ -105,7 +111,8 @@ struct GhibliTests {
              duration: "",
              image: "",
              bannerImage: "",
-             people: []
+             people: [],
+             url: "https://ghibliapi.vercel.app/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6"
          )
      ]
 
@@ -192,7 +199,7 @@ struct GhibliTests {
         let lastSearchQuery = await service.lastSearchQuery
         #expect(lastSearchQuery == nil)
         
-        #expect(viewModel.state == .idle)
+        #expect(viewModel.state.data == nil)
     }
     
     @MainActor

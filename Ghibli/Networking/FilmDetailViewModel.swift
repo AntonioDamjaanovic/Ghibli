@@ -19,35 +19,23 @@ class FilmDetailViewModel {
         self.service = service
     }
     
-    func fetch(for film: Film) async {
+    func fetch(for film: Film, filmUrl: String) async {
         guard !state.isLoading else { return }
         
         state = .loading
         
-        var loadedPeople: [Person] = []
-        
         do {
-            try await withThrowingTaskGroup(of: Person.self) { group in
-                
-                for personInfoURL in film.people {
-                    group.addTask {
-                        try await self.service.fetchPerson(from: personInfoURL)
-                    }
-                }
-                
-                for try await person in group {
-                    loadedPeople.append(person)
-                }
+            let allPeople = try await service.fetchPeople()
+            
+            let peopleInFilm = allPeople.filter { person in
+                person.films.contains(filmUrl)
             }
-            
-            state = .loaded(loadedPeople)
-            
+            self.state = .loaded(peopleInFilm)
         } catch let error as APIError {
             self.state = .error(error.errorDescription ?? "Unknown error")
         } catch {
             self.state = .error("Unknown error")
         }
-        
     }
 }
 
@@ -58,7 +46,7 @@ import Playgrounds
     let vm = FilmDetailViewModel(service: service)
     
     let film = service.fetchFilm()
-    await vm.fetch(for: film)
+    await vm.fetch(for: film, filmUrl: "")
     
     switch vm.state {
         case .idle:

@@ -55,7 +55,7 @@ struct FilmDetailScreen: View {
                 .controlSize(.large)
         }
         .task(id: film) {
-            await viewModel.fetch(for: film)
+            await viewModel.fetch(for: film, filmUrl: film.url)
         }
     }
 }
@@ -96,25 +96,30 @@ fileprivate struct CharacterSection: View {
                         ProgressView()
                         
                     case .loaded(let people):
-                        ForEach(people) { person in
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(person.name)
-                                
-                                HStack(spacing: 8) {
-                                    Label(person.gender, systemImage: "person.fill")
-                                    Text("Age: \(person.age)")
+                        if people.isEmpty {
+                            Text("Characters can't be shown at this moment.")
+                                .foregroundStyle(.pink)
+                        } else {
+                            ForEach(people) { person in
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(person.name)
                                     
-                                    Spacer()
-                                    
-                                    Label(person.eyeColor, systemImage: "eye")
-                                    Text("Hair: \(person.hairColor)")
+                                    HStack(spacing: 8) {
+                                        Label(person.gender, systemImage: "person.fill")
+                                        Text("Age: \(person.age)")
+                                        
+                                        Spacer()
+                                        
+                                        Label(person.eyeColor, systemImage: "eye")
+                                        Text("Hair: \(person.hairColor)")
+                                    }
+                                    .foregroundStyle(.secondary)
+                                    .font(.caption)
+                                    .lineLimit(1)
                                 }
-                                .foregroundStyle(.secondary)
-                                .font(.caption)
-                                .lineLimit(1)
                             }
                         }
-                        
+                    
                     case .error(let error):
                         Text(error)
                             .foregroundStyle(.pink)
