@@ -36,9 +36,22 @@
 		A9A49D402F0195D5001D2B77 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A9970D4A2F126B940069B9F4 /* Exceptions for "Ghibli" folder in "GhibliUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				UIIdentifiers.swift,
+			);
+			target = A9A49D1C2F0189FF001D2B77 /* GhibliUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A9A49D082F0189FE001D2B77 /* Ghibli */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A9970D4A2F126B940069B9F4 /* Exceptions for "Ghibli" folder in "GhibliUITests" target */,
+			);
 			path = Ghibli;
 			sourceTree = "<group>";
 		};

@@ -17,7 +17,9 @@ struct FilmListView: View {
             NavigationLink(value: film) {
                 FilmRow(film: film, favoritesViewModel: favoritesViewModel)
             }
+            .accessibilityIdentifier(UIIdentifiers.FilmListScreen.item(film.id))
         }
+        .accessibilityIdentifier(UIIdentifiers.FilmListScreen.filmList)
         .navigationDestination(for: Film.self) { film in
             FilmDetailScreen(film: film, favoritesViewModel: favoritesViewModel)
         }

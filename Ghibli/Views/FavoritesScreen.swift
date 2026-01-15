@@ -27,6 +27,7 @@ struct FavoritesScreen: View {
             Group {
                 if films.isEmpty {
                     ContentUnavailableView("No Favorites Yet", systemImage: "heart")
+                        .accessibilityIdentifier(UIIdentifiers.FavoritesScreen.contentUnavailableView)
                 } else {
                     FilmListView(films: films, favoritesViewModel: favoritesViewModel)
                 }

@@ -21,13 +21,17 @@ struct ContentView: View {
             Tab("Favorites", systemImage: "heart") {
                 FavoritesScreen(filmsViewModel: filmsViewModel, favoritesViewModel: favoritesViewModel)
             }
+            .accessibilityIdentifier(UIIdentifiers.FavoritesScreen.favoritesTab)
             
             Tab("Settings", systemImage: "gear") {
                 SettingsScreen()
             }
+            .accessibilityIdentifier(UIIdentifiers.SettingsScreen.settingsTab)
+            
             Tab(role: .search) {
                 SearchScreen(favoritesViewModel: favoritesViewModel)
             }
+            .accessibilityIdentifier(UIIdentifiers.SearchScreen.searchTab)
         }
         .task {
             await filmsViewModel.fetch()

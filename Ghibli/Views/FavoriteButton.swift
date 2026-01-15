@@ -23,5 +23,7 @@ struct FavoriteButton: View {
             Image(systemName: isFavorite ? "heart.fill" : "heart")
                 .foregroundStyle(isFavorite ? Color.pink : Color.gray)
         }
+        .accessibilityIdentifier(UIIdentifiers.favoriteButton)
+        .accessibilityValue(isFavorite ? "favorited" : "not_favorited")
     }
 }

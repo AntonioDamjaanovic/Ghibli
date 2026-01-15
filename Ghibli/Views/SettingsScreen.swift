@@ -26,8 +26,8 @@ struct SettingsScreen: View {
             Form {
                 Section {
                     Picker("Appearance", selection: $appearanceTheme) {
-                        ForEach(AppearanceTheme.allCases) {
-                            Text($0.rawValue.capitalized)
+                        ForEach(AppearanceTheme.allCases) { theme in
+                            Text(theme.rawValue.capitalized)
                         }
                     }
                     .pickerStyle(.inline)

@@ -25,6 +25,7 @@ struct FilmDetailScreen: View {
                     Text(film.title)
                         .font(.title)
                         .fontWeight(.bold)
+                        .accessibilityIdentifier(UIIdentifiers.FilmDetailScreen.title)
                     
                     Grid(alignment: .leading) {
                         InfoRow(label: "Director", value: film.director)
@@ -34,21 +35,25 @@ struct FilmDetailScreen: View {
                         InfoRow(label: "Score", value: "\(film.score)/100")
                     }
                     .padding(.vertical, 8)
+                    .accessibilityIdentifier(UIIdentifiers.FilmDetailScreen.info)
                     
                     Divider()
                     
                     Text("Description:")
                         .font(.headline)
+                        .accessibilityIdentifier(UIIdentifiers.FilmDetailScreen.description)
                     
                     Text(film.description)
                     
                     Divider()
                     
                     CharacterSection(viewModel: viewModel)
+                        .accessibilityIdentifier(UIIdentifiers.FilmDetailScreen.characterSection)
                 }
                 .padding()
             }
         }
+        .accessibilityIdentifier(UIIdentifiers.FilmDetailScreen.scrollView)
         .toolbar {
             FavoriteButton(filmID: film.id, favoritesViewModel: favoritesViewModel)
                 .buttonStyle(.plain)
