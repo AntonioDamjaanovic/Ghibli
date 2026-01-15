@@ -5,7 +5,8 @@ the project was build with the following:
 - SwiftUI with Observation feature for better performance
 - URLSession with async/await
 - MVVM with service layer
-- testing with Swift Testing
+- Swift Testing for unit tests
+- XCTest for UI tests
 
 API [documentation](https://ghibliapi.vercel.app/) for Studio Ghibli:
 - base URL: https://ghibliapi.vercel.app/
